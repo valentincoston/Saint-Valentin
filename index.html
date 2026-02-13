@@ -154,15 +154,15 @@
 </head>
 <body>
   <div class="card">
-    <h1>Do you love me ? 💘</h1>
-    <p>Toma la decision correcta… (et attrape le bouton 😈)</p>
+    <h1>you love me 💘</h1>
+    <p>Choisis bien… (et attrape le bouton 😈)</p>
 
     <div class="playground" id="playground" aria-label="zone de jeu">
       <button class="btn yes" id="yesBtn">Yes</button>
       <button class="btn no" id="noBtn">No</button>
     </div>
 
-    <div class="hint">Tip: on your phone, try more than once 👀</div>
+    <div class="hint">Tip: sur mobile, essaie plusieurs fois 👀</div>
   </div>
 
   <div class="overlay" id="overlay" role="dialog" aria-modal="true">
@@ -183,7 +183,7 @@
     // Option A (simple): mets des URLs d’images (ex: lien Imgur, Google Drive direct, etc.)
     // Option B (propre): mets "yes.jpg" et "no.jpg" dans le même dossier que index.html, et remplace par "yes.jpg" / "no.jpg"
     const IMAGES = {
-      yes: "https://fr.freepik.com/photos-gratuite/portrait-lion-afrique-dans-lumiere-chaude_15252754.htm#fromView=keyword&page=1&position=0&uuid=b40bb9db-ba8e-46df-858d-e78207a7891a&query=Lion",
+      yes: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1600&q=80",
       no:  "https://images.unsplash.com/photo-1520962917960-67f39bfacbdc?auto=format&fit=crop&w=1600&q=80"
     };
 
@@ -237,22 +237,29 @@
       placeButton(noBtn,  w*0.70 - noBtn.offsetWidth/2,  h*0.60);
     }
 
-    // 🔥 YES devient impossible à attraper (comme NO avant)
-yesBtn.addEventListener("mouseenter", dodge);
-yesBtn.addEventListener("pointerenter", dodge);
-yesBtn.addEventListener("touchstart", (e) => { 
-  e.preventDefault(); 
-  dodge(); 
-}, {passive:false});
+    // Bouton NO esquive (hover + touchstart)
+    function dodge(){
+      randomSpot(noBtn);
+    }
 
+    // Bonus: le YES bouge un peu aussi (mais moins)
+    function wiggleYes(){
+      const { w, h } = getBounds();
+      const bw = yesBtn.offsetWidth;
+      const bh = yesBtn.offsetHeight;
+      const padding = 12;
 
-// 😈 NO devient juste un peu fuyant (comme YES avant)
-noBtn.addEventListener("mouseenter", () => {
-  if (Math.random() < 0.35) wiggleYes();
-});
-noBtn.addEventListener("touchstart", () => {
-  if (Math.random() < 0.45) wiggleYes();
-}, {passive:true});
+      const currentX = parseFloat(yesBtn.style.left || "0");
+      const currentY = parseFloat(yesBtn.style.top  || "0");
+
+      const dx = rand(-70, 70);
+      const dy = rand(-45, 45);
+
+      const x = clamp(currentX + dx, padding, w - bw - padding);
+      const y = clamp(currentY + dy, padding, h - bh - padding);
+
+      placeButton(yesBtn, x, y);
+    }
 
     // Afficher résultat
     function showResult(kind){
@@ -313,3 +320,4 @@ noBtn.addEventListener("touchstart", () => {
   </script>
 </body>
 </html>
+
