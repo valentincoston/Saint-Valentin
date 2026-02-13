@@ -1,219 +1,368 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>💘 Valentine Link</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>💘 Pour ma FabFab</title>
 
-<style>
-:root{
-  --bg1:#ff5fa2;
-  --bg2:#7c4dff;
-  --card:#ffffffcc;
-  --shadow:0 18px 60px rgba(0,0,0,.25);
-}
+  <style>
+    :root{
+      --bg1:#ff5fa2;
+      --bg2:#7c4dff;
+      --card:#ffffffcc;
+      --text:#141414;
+      --shadow: 0 18px 60px rgba(0,0,0,.25);
+    }
 
-*{box-sizing:border-box;}
+    *{ box-sizing:border-box; }
 
-body{
-  margin:0;
-  min-height:100vh;
-  font-family:system-ui, sans-serif;
-  background:
-    radial-gradient(1200px 700px at 20% 20%, rgba(255,255,255,.35), transparent 60%),
-    radial-gradient(900px 600px at 80% 30%, rgba(255,255,255,.25), transparent 60%),
-    linear-gradient(135deg,var(--bg1),var(--bg2));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 20%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(900px 600px at 80% 30%, rgba(255,255,255,.25), transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
 
-.card{
-  width:min(760px,94vw);
-  background:var(--card);
-  border-radius:26px;
-  padding:28px;
-  text-align:center;
-  box-shadow:var(--shadow);
-}
+    .card{
+      width:min(780px, 94vw);
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.35);
+      backdrop-filter: blur(10px);
+      border-radius:26px;
+      box-shadow: var(--shadow);
+      padding:28px 22px 22px;
+      text-align:center;
+    }
 
-.playground{
-  position:relative;
-  height:320px;
-  margin-top:16px;
-  border-radius:20px;
-  border:1px dashed rgba(0,0,0,.15);
-  background:rgba(255,255,255,.5);
-  overflow:hidden;
-}
+    h1{
+      margin:0 0 6px;
+      font-size: clamp(30px, 4vw, 50px);
+      letter-spacing:.2px;
+    }
 
-.btn{
-  position:absolute;
-  border:none;
-  border-radius:999px;
-  font-weight:800;
-  cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
-  transition:transform .1s ease;
-}
+    p{
+      margin:0 0 14px;
+      font-size: clamp(15px, 2vw, 18px);
+      opacity:.9;
+    }
 
-.btn:active{transform:scale(.96);}
+    .playground{
+      position:relative;
+      height: 320px;
+      margin-top: 12px;
+      border-radius:20px;
+      border:1px dashed rgba(0,0,0,.15);
+      background: rgba(255,255,255,.45);
+      overflow:hidden;
+    }
 
-/* OUI un peu plus simple */
-.yes{
-  background:#18c37e;
-  color:white;
-  padding:16px 22px;
-  min-width:140px;
-  font-size:17px;
-}
+    .btn{
+      position:absolute;
+      border:none;
+      border-radius:999px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,.15);
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .08s ease;
+      touch-action: manipulation;
+      z-index: 2;
+    }
+    .btn:active{ transform: scale(.97); }
 
-/* NO mas que un taquito XXL */
-.no{
-  background:#ff3b57;
-  color:white;
-  padding:40px 60px;   /* doublé */
-  min-width:420px;     /* doublé */
-  font-size:28px;      /* plus gros */
-}
+    /* ✅ Bouton difficile mais cliquable */
+    .yes{
+      background:#18c37e;
+      color:white;
+      padding: 16px 22px;
+      min-width: 140px;
+      font-size: 17px;
+      z-index: 3; /* toujours au-dessus du rouge */
+    }
 
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
+    /* ✅ Bouton plus gros mais pas bloquant */
+    .no{
+      background:#ff3b57;
+      color:white;
+      padding: 28px 40px;
+      min-width: 260px;
+      font-size: 20px;
+      z-index: 2;
+      animation: pulse 1.6s infinite;
+    }
 
-.overlay.show{display:flex;}
+    @keyframes pulse{
+      0%{ transform:scale(1); }
+      50%{ transform:scale(1.04); }
+      100%{ transform:scale(1); }
+    }
 
-.modal{
-  background:white;
-  padding:20px;
-  border-radius:20px;
-  text-align:center;
-  max-width:800px;
-  width:90%;
-}
+    .hint{
+      margin-top:12px;
+      font-size: 13px;
+      opacity:.8;
+    }
 
-.modal img{
-  width:100%;
-  max-height:400px;
-  object-fit:cover;
-  border-radius:16px;
-}
+    /* Modal résultat */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 10;
+    }
+    .overlay.show{ display:flex; }
 
-</style>
+    .modal{
+      width: min(860px, 96vw);
+      background: rgba(255,255,255,.95);
+      border-radius: 24px;
+      overflow:hidden;
+      box-shadow: 0 22px 80px rgba(0,0,0,.4);
+    }
+    .modalTop{
+      padding: 16px 18px 0;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+    }
+    .modal h2{
+      margin:0;
+      font-size: clamp(20px, 2.8vw, 28px);
+    }
+    .close{
+      border:none;
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor:pointer;
+      background: rgba(0,0,0,.08);
+      font-weight:800;
+    }
+    .imgWrap{ padding: 14px 18px 10px; }
+    .img{
+      width:100%;
+      height: min(60vh, 520px);
+      object-fit: cover;
+      border-radius: 18px;
+      border:1px solid rgba(0,0,0,.1);
+      background: #f2f2f2;
+    }
+    .caption{
+      padding: 0 18px 18px;
+      margin-top: -6px;
+      font-size: 15px;
+      opacity:.9;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="card">
+    <h1>Que si te amo ? 💘</h1>
+    <p>Atrápalo si puedes <b>Oui</b>… (Mi amor se gana Cacas😈)</p>
 
-<div class="card">
-  <h1>💘 Do you love me?</h1>
+    <div class="playground" id="playground" aria-label="zone de jeu">
+      <button class="btn yes" id="yesBtn">Oui</button>
+      <button class="btn no" id="noBtn">No mas que un taquito</button>
+    </div>
 
-  <div class="playground" id="playground">
-    <button class="btn yes" id="yesBtn">Oui</button>
-    <button class="btn no" id="noBtn">nomas que un taquito</button>
+    <div class="hint"> Toca rápido 👀</div>
   </div>
-</div>
 
-<div class="overlay" id="overlay">
-  <div class="modal">
-    <h2 id="modalTitle"></h2>
-    <img id="modalImg">
-    <p id="modalCaption"></p>
-    <button onclick="overlay.classList.remove('show')">Close</button>
+  <!-- Modal résultat -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modalTop">
+        <h2 id="modalTitle">💖</h2>
+        <button class="close" id="closeBtn">Close</button>
+      </div>
+      <div class="imgWrap">
+        <img class="img" id="modalImg" alt="valentine image" />
+      </div>
+      <div class="caption" id="modalCaption"></div>
+    </div>
   </div>
-</div>
 
-<audio id="sndYes">
-  <source src="yes.mp3" type="audio/mpeg">
-</audio>
-<audio id="sndNo">
-  <source src="no.mp3" type="audio/mpeg">
-</audio>
+  <!-- 🔊 Sons (mets yes.mp3 / no.mp3 à la racine du repo) -->
+  <audio id="sndYes" preload="auto">
+    <source src="yes.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="sndNo" preload="auto">
+    <source src="no.mp3" type="audio/mpeg">
+  </audio>
 
-<script>
+  <script>
+    // ✅ Images (remplace par "yes.jpg" / "no.jpg" si tu upload tes images)
+    const IMAGES = {
+      yes: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1600&q=80",
+      no:  "https://images.unsplash.com/photo-1520962917960-67f39bfacbdc?auto=format&fit=crop&w=1600&q=80"
+    };
 
-const IMAGES = {
-  yes: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1600&q=80",
-  no: "https://images.unsplash.com/photo-1520962917960-67f39bfacbdc?auto=format&fit=crop&w=1600&q=80"
-};
+    const TEXTS = {
+      yesTitle: "😌 Je savais que tu m’aimais",
+      yesCaption: "Happy Valentine’s mi amor 💘",
+      noTitle: "😂 NO MAS QUE UN TAQUITO",
+      noCaption: "Pardon mister Jesus, me gusta muchisimo la cochinita pibil y la baguette con jamoncito 😈"
+    };
 
-const TEXTS = {
-  yesTitle:"😌 Je savais...",
-  yesCaption:"Happy Valentine’s mi amor 💘",
-  noTitle:"😂 NOMAS QUE UN TAQUITO",
-  noCaption:"Tu pensais que ce serait facile hein ? 😈"
-};
+    const playground = document.getElementById("playground");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn  = document.getElementById("noBtn");
 
-const playground=document.getElementById("playground");
-const yesBtn=document.getElementById("yesBtn");
-const noBtn=document.getElementById("noBtn");
-const overlay=document.getElementById("overlay");
-const modalTitle=document.getElementById("modalTitle");
-const modalImg=document.getElementById("modalImg");
-const modalCaption=document.getElementById("modalCaption");
+    const overlay = document.getElementById("overlay");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalImg = document.getElementById("modalImg");
+    const modalCaption = document.getElementById("modalCaption");
+    const closeBtn = document.getElementById("closeBtn");
 
-const sndYes=document.getElementById("sndYes");
-const sndNo=document.getElementById("sndNo");
+    const sndYes = document.getElementById("sndYes");
+    const sndNo  = document.getElementById("sndNo");
 
-function rand(min,max){return Math.random()*(max-min)+min;}
+    function rand(min, max){ return Math.random() * (max - min) + min; }
+    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
 
-function randomSpot(btn){
-  const r=playground.getBoundingClientRect();
-  const padding=10;
-  const x=rand(padding,r.width-btn.offsetWidth-padding);
-  const y=rand(padding,r.height-btn.offsetHeight-padding);
-  btn.style.left=x+"px";
-  btn.style.top=y+"px";
-}
+    function getBounds(){
+      const r = playground.getBoundingClientRect();
+      return { w: r.width, h: r.height };
+    }
 
-function init(){
-  randomSpot(yesBtn);
-  randomSpot(noBtn);
-}
+    function placeButton(btn, x, y){
+      btn.style.left = x + "px";
+      btn.style.top  = y + "px";
+    }
 
-/* OUI difficile mais plus simple qu'avant */
-yesBtn.addEventListener("pointerenter",()=>{
-  if(Math.random()<0.75) randomSpot(yesBtn);
-});
-yesBtn.addEventListener("pointermove",()=>{
-  if(Math.random()<0.25) randomSpot(yesBtn);
-});
-yesBtn.addEventListener("touchstart",(e)=>{
-  e.preventDefault();
-  if(Math.random()<0.6) randomSpot(yesBtn);
-},{passive:false});
+    function randomSpot(btn){
+      const { w, h } = getBounds();
+      const bw = btn.offsetWidth;
+      const bh = btn.offsetHeight;
+      const padding = 10;
 
-/* NO facile */
-noBtn.addEventListener("pointerenter",()=>{});
-noBtn.addEventListener("touchstart",()=>{});
+      const x = rand(padding, w - bw - padding);
+      const y = rand(padding, h - bh - padding);
+      placeButton(btn, x, y);
+    }
 
-/* CLIC */
-yesBtn.addEventListener("click",()=>{
-  sndYes.currentTime=0;
-  sndYes.play();
-  modalTitle.textContent=TEXTS.yesTitle;
-  modalImg.src=IMAGES.yes;
-  modalCaption.textContent=TEXTS.yesCaption;
-  overlay.classList.add("show");
-});
+    function init(){
+      const { w, h } = getBounds();
+      placeButton(yesBtn, w * 0.25 - yesBtn.offsetWidth / 2, h * 0.60);
+      placeButton(noBtn,  w * 0.70 - noBtn.offsetWidth / 2,  h * 0.60);
+    }
 
-noBtn.addEventListener("click",()=>{
-  sndNo.currentTime=0;
-  sndNo.play();
-  modalTitle.textContent=TEXTS.noTitle;
-  modalImg.src=IMAGES.no;
-  modalCaption.textContent=TEXTS.noCaption;
-  overlay.classList.add("show");
-});
+    // ✅ Oui : dur mais plus simple (probabilités réduites)
+    const HARDNESS = {
+      fleeOnEnterProbability: 0.72, // ↓ moins que 0.92
+      fleeOnMoveProbability:  0.18, // ↓ moins que 0.45
+      fleeOnTouchProbability: 0.55, // ↓ moins que 0.75
+      jumpX: 180,
+      jumpY: 130
+    };
 
-setTimeout(init,60);
+    function fleeYes(){
+      const { w, h } = getBounds();
+      const bw = yesBtn.offsetWidth;
+      const bh = yesBtn.offsetHeight;
+      const padding = 10;
 
-</script>
+      const currentX = parseFloat(yesBtn.style.left || "0");
+      const currentY = parseFloat(yesBtn.style.top  || "0");
 
+      const dx = rand(-HARDNESS.jumpX, HARDNESS.jumpX);
+      const dy = rand(-HARDNESS.jumpY, HARDNESS.jumpY);
+
+      const x = clamp(currentX + dx, padding, w - bw - padding);
+      const y = clamp(currentY + dy, padding, h - bh - padding);
+      placeButton(yesBtn, x, y);
+    }
+
+    // NO : facile (et surtout ne bloque jamais le vert)
+    function tinyWiggleNo(){
+      // 5% max, donc quasi immobile
+      if (Math.random() < 0.05) randomSpot(noBtn);
+    }
+
+    function playSound(audioEl){
+      try{
+        audioEl.currentTime = 0;
+        audioEl.play();
+      }catch(e){
+        // son bloqué -> silencieux
+      }
+    }
+
+    function showResult(kind){
+      const isYes = kind === "yes";
+      modalTitle.textContent = isYes ? TEXTS.yesTitle : TEXTS.noTitle;
+      modalCaption.textContent = isYes ? TEXTS.yesCaption : TEXTS.noCaption;
+      modalImg.src = isYes ? IMAGES.yes : IMAGES.no;
+      overlay.classList.add("show");
+    }
+
+    function closeModal(){
+      overlay.classList.remove("show");
+      init();
+    }
+
+    // Events difficulté
+    yesBtn.addEventListener("pointerenter", () => {
+      if (Math.random() < HARDNESS.fleeOnEnterProbability) fleeYes();
+    });
+    yesBtn.addEventListener("mouseenter", () => {
+      if (Math.random() < HARDNESS.fleeOnEnterProbability) fleeYes();
+    });
+    yesBtn.addEventListener("pointermove", () => {
+      if (Math.random() < HARDNESS.fleeOnMoveProbability) fleeYes();
+    });
+    yesBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      if (Math.random() < HARDNESS.fleeOnTouchProbability) fleeYes();
+    }, { passive:false });
+
+    noBtn.addEventListener("pointerenter", tinyWiggleNo);
+    noBtn.addEventListener("mouseenter", tinyWiggleNo);
+
+    // Clicks + sons + images
+    yesBtn.addEventListener("click", () => {
+      playSound(sndYes);
+      showResult("yes");
+    });
+
+    noBtn.addEventListener("click", () => {
+      playSound(sndNo);
+      showResult("no");
+    });
+
+    // Modal
+    closeBtn.addEventListener("click", closeModal);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeModal();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    // Responsif
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(init, 120);
+    });
+
+    // go
+    setTimeout(init, 60);
+  </script>
 </body>
 </html>
