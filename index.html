@@ -1,134 +1,137 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>💘 Valentine Link</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>💘 Pour ma Fabfab</title>
 
-  <style>
-    :root{
-      --bg1:#ff5fa2;
-      --bg2:#7c4dff;
-      --card:#ffffffcc;
-      --text:#1a1a1a;
-      --shadow: 0 18px 60px rgba(0,0,0,.25);
-    }
-
-    *{ box-sizing:border-box; }
-
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 20% 20%, rgba(255,255,255,.35), transparent 60%),
-        radial-gradient(900px 600px at 80% 30%, rgba(255,255,255,.25), transparent 60%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-    }
-
-    .card{
-      width:min(720px, 92vw);
-      background:var(--card);
-      border-radius:26px;
-      box-shadow: var(--shadow);
-      padding:28px 22px 26px;
-      text-align:center;
-    }
-
-    h1{
-      margin:0 0 8px;
-      font-size: clamp(34px, 4vw, 52px);
-    }
-
-    .playground{
-      position:relative;
-      height:260px;
-      margin-top:14px;
-      border-radius:20px;
-      border:1px dashed rgba(0,0,0,.15);
-      background: rgba(255,255,255,.45);
-      overflow:hidden;
-    }
-
-    .btn{
-      position:absolute;
-      padding:14px 18px;
-      min-width:120px;
-      border:none;
-      border-radius:999px;
-      font-weight:700;
-      cursor:pointer;
-      box-shadow:0 10px 25px rgba(0,0,0,.15);
-    }
-    
-    .no{
-  background:#ff3b57;
-  color:white;
-
-  padding:22px 30px;   /* plus grand */
-  min-width:180px;     /* largeur minimale plus grande */
-  font-size:20px;      /* texte plus gros */
+<style>
+:root{
+  --bg1:#ff5fa2;
+  --bg2:#7c4dff;
+  --card:#ffffffcc;
+  --text:#1a1a1a;
+  --shadow: 0 18px 60px rgba(0,0,0,.25);
 }
 
+*{ box-sizing:border-box; }
 
-    .yes{ background:#18c37e; color:white; }
-    .no{ background:#ff3b57; color:white; }
+body{
+  margin:0;
+  min-height:100vh;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 700px at 20% 20%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(900px 600px at 80% 30%, rgba(255,255,255,.25), transparent 60%),
+    linear-gradient(135deg, var(--bg1), var(--bg2));
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
 
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-    }
+.card{
+  width:min(720px, 92vw);
+  background:var(--card);
+  border-radius:26px;
+  box-shadow: var(--shadow);
+  padding:28px 22px 26px;
+  text-align:center;
+}
 
-    .overlay.show{ display:flex; }
+h1{
+  margin:0 0 8px;
+  font-size: clamp(34px, 4vw, 52px);
+}
 
-    .modal{
-      width:min(820px,96vw);
-      background:white;
-      border-radius:24px;
-      overflow:hidden;
-      padding:20px;
-      text-align:center;
-    }
+.playground{
+  position:relative;
+  height:260px;
+  margin-top:14px;
+  border-radius:20px;
+  border:1px dashed rgba(0,0,0,.15);
+  background: rgba(255,255,255,.45);
+  overflow:hidden;
+}
 
-    .modal img{
-      width:100%;
-      max-height:400px;
-      object-fit:cover;
-      border-radius:18px;
-    }
+.btn{
+  position:absolute;
+  padding:14px 18px;
+  min-width:120px;
+  border:none;
+  border-radius:999px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  transition:0.2s ease;
+}
 
-  </style>
+/* YES petit et difficile */
+.OUI{
+  background:#18c37e;
+  color:white;
+}
+
+/* NO plus gros et attirant */
+.No más que un taquito{
+  background:#ff3b57;
+  color:white;
+  padding:24px 36px;
+  min-width:200px;
+  font-size:20px;
+  transform: scale(1.15);
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.overlay.show{ display:flex; }
+
+.modal{
+  width:min(820px,96vw);
+  background:white;
+  border-radius:24px;
+  overflow:hidden;
+  padding:20px;
+  text-align:center;
+}
+
+.modal img{
+  width:100%;
+  max-height:400px;
+  object-fit:cover;
+  border-radius:18px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="card">
-    <h1>Que si te amo ? 💘</h1>
+<div class="card">
+  <h1>Do you love me ? 💘</h1>
 
-    <div class="playground" id="playground">
-      <button class="btn Oui" id="yesBtn">Oui</button>
-      <button class="btn Non" id="noBtn">Non</button>
-    </div>
+  <div class="playground" id="playground">
+    <button class="btn yes" id="yesBtn">Yes</button>
+    <button class="btn no" id="noBtn">No</button>
   </div>
+</div>
 
-  <div class="overlay" id="overlay">
-    <div class="modal">
-      <h2 id="modalTitle"></h2>
-      <img id="modalImg">
-      <p id="modalCaption"></p>
-      <button onclick="overlay.classList.remove('show')">Close</button>
-    </div>
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2 id="modalTitle"></h2>
+    <img id="modalImg">
+    <p id="modalCaption"></p>
+    <button onclick="overlay.classList.remove('show')">Close</button>
   </div>
+</div>
 
 <script>
 
@@ -183,11 +186,7 @@ function showResult(type){
   overlay.classList.add("show");
 }
 
-/* ============================= */
-/* 🔥 INVERSION DES DIFFICULTÉS */
-/* ============================= */
-
-/* YES = très difficile */
+/* YES = ultra difficile */
 ["mouseenter","pointerenter","pointermove"].forEach(evt=>{
   yesBtn.addEventListener(evt,()=>randomSpot(yesBtn));
 });
@@ -196,7 +195,7 @@ yesBtn.addEventListener("touchstart",(e)=>{
   randomSpot(yesBtn);
 },{passive:false});
 
-/* NO = bouge un peu seulement */
+/* NO = légèrement joueur */
 noBtn.addEventListener("mouseenter",()=>{
   if(Math.random()<0.35){
     randomSpot(noBtn);
