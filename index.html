@@ -237,15 +237,22 @@
       placeButton(noBtn,  w*0.70 - noBtn.offsetWidth/2,  h*0.60);
     }
 
-    // Bouton NO esquive (hover + touchstart)
-    function dodge(){
-      randomSpot(noBtn);
-    }
+    // 🔥 YES devient impossible à attraper (comme NO avant)
+yesBtn.addEventListener("mouseenter", dodge);
+yesBtn.addEventListener("pointerenter", dodge);
+yesBtn.addEventListener("touchstart", (e) => { 
+  e.preventDefault(); 
+  dodge(); 
+}, {passive:false});
 
-    // Bonus: le YES bouge un peu aussi (mais moins)
-    function dodge(){
-      randomSpot(noBtn);
-    }
+
+// 😈 NO devient juste un peu fuyant (comme YES avant)
+noBtn.addEventListener("mouseenter", () => {
+  if (Math.random() < 0.35) wiggleYes();
+});
+noBtn.addEventListener("touchstart", () => {
+  if (Math.random() < 0.45) wiggleYes();
+}, {passive:true});
 
     // Afficher résultat
     function showResult(kind){
