@@ -1,219 +1,377 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>💘 Pour ma Fabfab</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>💘 Valentine Link</title>
 
-<style>
-:root{
-  --bg1:#ff5fa2;
-  --bg2:#7c4dff;
-  --card:#ffffffcc;
-  --text:#1a1a1a;
-  --shadow: 0 18px 60px rgba(0,0,0,.25);
-}
+  <style>
+    :root{
+      --bg1:#ff5fa2;
+      --bg2:#7c4dff;
+      --card:#ffffffcc;
+      --text:#141414;
+      --shadow: 0 18px 60px rgba(0,0,0,.25);
+    }
 
-*{ box-sizing:border-box; }
+    *{ box-sizing:border-box; }
 
-body{
-  margin:0;
-  min-height:100vh;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(1200px 700px at 20% 20%, rgba(255,255,255,.35), transparent 60%),
-    radial-gradient(900px 600px at 80% 30%, rgba(255,255,255,.25), transparent 60%),
-    linear-gradient(135deg, var(--bg1), var(--bg2));
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 20%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(900px 600px at 80% 30%, rgba(255,255,255,.25), transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
 
-.card{
-  width:min(720px, 92vw);
-  background:var(--card);
-  border-radius:26px;
-  box-shadow: var(--shadow);
-  padding:28px 22px 26px;
-  text-align:center;
-}
+    .card{
+      width:min(760px, 94vw);
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.35);
+      backdrop-filter: blur(10px);
+      border-radius:26px;
+      box-shadow: var(--shadow);
+      padding:28px 22px 22px;
+      text-align:center;
+      position:relative;
+    }
 
-h1{
-  margin:0 0 8px;
-  font-size: clamp(34px, 4vw, 52px);
-}
+    h1{
+      margin:0 0 6px;
+      font-size: clamp(30px, 4vw, 50px);
+      letter-spacing:.2px;
+    }
 
-.playground{
-  position:relative;
-  height:260px;
-  margin-top:14px;
-  border-radius:20px;
-  border:1px dashed rgba(0,0,0,.15);
-  background: rgba(255,255,255,.45);
-  overflow:hidden;
-}
+    p{
+      margin:0 0 16px;
+      font-size: clamp(15px, 2vw, 18px);
+      opacity:.9;
+    }
 
-.btn{
-  position:absolute;
-  padding:14px 18px;
-  min-width:120px;
-  border:none;
-  border-radius:999px;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
-  transition:0.2s ease;
-}
+    .playground{
+      position:relative;
+      height: 300px;
+      margin-top: 12px;
+      border-radius:20px;
+      border:1px dashed rgba(0,0,0,.15);
+      background: rgba(255,255,255,.45);
+      overflow:hidden;
+    }
 
-/* YES petit et difficile */
-.OUI{
-  background:#18c37e;
-  color:white;
-}
+    .btn{
+      position:absolute;
+      border:none;
+      border-radius:999px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,.15);
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .08s ease;
+      touch-action: manipulation;
+    }
+    .btn:active{ transform: scale(.97); }
 
-/* NO plus gros et attirant */
-.No más que un taquito{
-  background:#ff3b57;
-  color:white;
-  padding:24px 36px;
-  min-width:200px;
-  font-size:20px;
-  transform: scale(1.15);
-}
+    /* ✅ Bouton difficile */
+    .yes{
+      background:#18c37e;
+      color:white;
+      padding: 14px 18px;
+      min-width: 120px;
+      font-size: 16px;
+    }
 
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
+    /* ✅ Bouton facile + plus gros */
+    .nomas{
+      background:#ff3b57;
+      color:white;
+      padding: 22px 30px;
+      min-width: 220px;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
 
-.overlay.show{ display:flex; }
+    .hint{
+      margin-top:12px;
+      font-size: 13px;
+      opacity:.8;
+    }
 
-.modal{
-  width:min(820px,96vw);
-  background:white;
-  border-radius:24px;
-  overflow:hidden;
-  padding:20px;
-  text-align:center;
-}
+    /* Modal */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 10;
+    }
+    .overlay.show{ display:flex; }
 
-.modal img{
-  width:100%;
-  max-height:400px;
-  object-fit:cover;
-  border-radius:18px;
-}
-</style>
+    .modal{
+      width: min(860px, 96vw);
+      background: rgba(255,255,255,.95);
+      border-radius: 24px;
+      overflow:hidden;
+      box-shadow: 0 22px 80px rgba(0,0,0,.4);
+    }
+    .modalTop{
+      padding: 16px 18px 0;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+    }
+    .modal h2{
+      margin:0;
+      font-size: clamp(20px, 2.8vw, 28px);
+    }
+    .close{
+      border:none;
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor:pointer;
+      background: rgba(0,0,0,.08);
+      font-weight:800;
+    }
+    .imgWrap{ padding: 14px 18px 10px; }
+    .img{
+      width:100%;
+      height: min(60vh, 520px);
+      object-fit: cover;
+      border-radius: 18px;
+      border:1px solid rgba(0,0,0,.1);
+      background: #f2f2f2;
+    }
+    .caption{
+      padding: 0 18px 18px;
+      margin-top: -6px;
+      font-size: 15px;
+      opacity:.9;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="card">
+    <h1>💘 Valentine mode</h1>
+    <p>Essaie d’attraper <b>Oui</b>… si tu peux 😈</p>
 
-<div class="card">
-  <h1>Do you love me ? 💘</h1>
+    <div class="playground" id="playground" aria-label="zone de jeu">
+      <button class="btn yes" id="yesBtn">Oui</button>
+      <button class="btn nomas" id="noBtn">nomas que un tacto</button>
+    </div>
 
-  <div class="playground" id="playground">
-    <button class="btn yes" id="yesBtn">Yes</button>
-    <button class="btn no" id="noBtn">No</button>
+    <div class="hint">Astuce : sur mobile, touche vite… 👀</div>
   </div>
-</div>
 
-<div class="overlay" id="overlay">
-  <div class="modal">
-    <h2 id="modalTitle"></h2>
-    <img id="modalImg">
-    <p id="modalCaption"></p>
-    <button onclick="overlay.classList.remove('show')">Close</button>
+  <!-- Modal résultat -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modalTop">
+        <h2 id="modalTitle">💖</h2>
+        <button class="close" id="closeBtn">Close</button>
+      </div>
+      <div class="imgWrap">
+        <img class="img" id="modalImg" alt="valentine image" />
+      </div>
+      <div class="caption" id="modalCaption"></div>
+    </div>
   </div>
-</div>
 
-<script>
+  <!-- 🔊 Sons (mets yes.mp3 / no.mp3 à la racine du repo) -->
+  <audio id="sndYes" preload="auto">
+    <source src="yes.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="sndNo" preload="auto">
+    <source src="no.mp3" type="audio/mpeg">
+  </audio>
 
-const IMAGES = {
-  yes: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1600&q=80",
-  no: "https://images.unsplash.com/photo-1520962917960-67f39bfacbdc?auto=format&fit=crop&w=1600&q=80"
-};
+  <script>
+    // ✅ Images (tu peux remplacer par tes images)
+    // Astuce: mets "yes.jpg" et "no.jpg" à la racine du repo, et remplace par "yes.jpg"/"no.jpg"
+    const IMAGES = {
+      yes: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1600&q=80",
+      no:  "https://images.unsplash.com/photo-1520962917960-67f39bfacbdc?auto=format&fit=crop&w=1600&q=80"
+    };
 
-const TEXTS = {
-  yesTitle: "OK… I knew it 😌💘",
-  yesCaption: "Happy Valentine’s, mi amor ❤️",
-  noTitle: "😂 Nice try",
-  noCaption: "Même si tu dis non… je sais la vérité 😈"
-};
+    const TEXTS = {
+      yesTitle: "😌 Je savais que tu m’aimais",
+      yesCaption: "Happy Valentine’s mi amor 💘",
+      noTitle: "😂 NOMAS QUE UN TACTO",
+      noCaption: "Ok ok… mais je sais quand même 😈"
+    };
 
-const playground = document.getElementById("playground");
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const overlay = document.getElementById("overlay");
-const modalTitle = document.getElementById("modalTitle");
-const modalImg = document.getElementById("modalImg");
-const modalCaption = document.getElementById("modalCaption");
+    const playground = document.getElementById("playground");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn  = document.getElementById("noBtn");
 
-function rand(min,max){ return Math.random()*(max-min)+min; }
+    const overlay = document.getElementById("overlay");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalImg = document.getElementById("modalImg");
+    const modalCaption = document.getElementById("modalCaption");
+    const closeBtn = document.getElementById("closeBtn");
 
-function placeButton(btn,x,y){
-  btn.style.left = x+"px";
-  btn.style.top = y+"px";
-}
+    const sndYes = document.getElementById("sndYes");
+    const sndNo  = document.getElementById("sndNo");
 
-function randomSpot(btn){
-  const r = playground.getBoundingClientRect();
-  const bw = btn.offsetWidth;
-  const bh = btn.offsetHeight;
-  const padding = 10;
+    function rand(min, max){ return Math.random() * (max - min) + min; }
+    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
 
-  const x = rand(padding, r.width-bw-padding);
-  const y = rand(padding, r.height-bh-padding);
+    function getBounds(){
+      const r = playground.getBoundingClientRect();
+      return { w: r.width, h: r.height };
+    }
 
-  placeButton(btn,x,y);
-}
+    function placeButton(btn, x, y){
+      btn.style.left = x + "px";
+      btn.style.top  = y + "px";
+    }
 
-function init(){
-  randomSpot(yesBtn);
-  randomSpot(noBtn);
-}
+    function randomSpot(btn){
+      const { w, h } = getBounds();
+      const bw = btn.offsetWidth;
+      const bh = btn.offsetHeight;
+      const padding = 10;
 
-function showResult(type){
-  modalTitle.textContent = TEXTS[type+"Title"];
-  modalImg.src = IMAGES[type];
-  modalCaption.textContent = TEXTS[type+"Caption"];
-  overlay.classList.add("show");
-}
+      const x = rand(padding, w - bw - padding);
+      const y = rand(padding, h - bh - padding);
+      placeButton(btn, x, y);
+    }
 
-/* YES = ultra difficile */
-["mouseenter","pointerenter","pointermove"].forEach(evt=>{
-  yesBtn.addEventListener(evt,()=>randomSpot(yesBtn));
-});
-yesBtn.addEventListener("touchstart",(e)=>{
-  e.preventDefault();
-  randomSpot(yesBtn);
-},{passive:false});
+    function init(){
+      const { w, h } = getBounds();
+      // placement initial "mignon"
+      placeButton(yesBtn, w * 0.25 - yesBtn.offsetWidth / 2, h * 0.60);
+      placeButton(noBtn,  w * 0.70 - noBtn.offsetWidth / 2,  h * 0.60);
+    }
 
-/* NO = légèrement joueur */
-noBtn.addEventListener("mouseenter",()=>{
-  if(Math.random()<0.35){
-    randomSpot(noBtn);
-  }
-});
-noBtn.addEventListener("touchstart",()=>{
-  if(Math.random()<0.45){
-    randomSpot(noBtn);
-  }
-},{passive:true});
+    // ✅ Oui très difficile mais attrapable :
+    // - Il fuit quand on s'approche (pointerenter)
+    // - Il peut aussi bouger parfois pendant qu'on le "survole"
+    // - MAIS on laisse une petite chance : il ne fuit pas à 100% (probabilité)
+    const HARDNESS = {
+      fleeOnEnterProbability: 0.92,  // 92% du temps il fuit quand on approche
+      fleeOnMoveProbability: 0.45,   // 45% pendant les mouvements au-dessus
+      jumpDistance: 1.0              // 1.0 = normal, >1 = plus loin (on garde attrapable)
+    };
 
-yesBtn.addEventListener("click",()=>showResult("yes"));
-noBtn.addEventListener("click",()=>showResult("no"));
+    function fleeYes(){
+      // sauts plus "grands" mais toujours dans la zone
+      const { w, h } = getBounds();
+      const bw = yesBtn.offsetWidth;
+      const bh = yesBtn.offsetHeight;
+      const padding = 10;
 
-setTimeout(init,50);
+      const currentX = parseFloat(yesBtn.style.left || "0");
+      const currentY = parseFloat(yesBtn.style.top  || "0");
 
-</script>
+      const dx = rand(-220, 220) * HARDNESS.jumpDistance;
+      const dy = rand(-160, 160) * HARDNESS.jumpDistance;
 
+      const x = clamp(currentX + dx, padding, w - bw - padding);
+      const y = clamp(currentY + dy, padding, h - bh - padding);
+      placeButton(yesBtn, x, y);
+    }
+
+    // NO facile : il ne fuit pas, ou très rarement (tu peux mettre à 0)
+    function tinyWiggleNo(){
+      if (Math.random() < 0.10) randomSpot(noBtn); // 10% max, donc facile
+    }
+
+    function playSound(audioEl){
+      // important: reset pour permettre plusieurs clics
+      try{
+        audioEl.currentTime = 0;
+        audioEl.play();
+      }catch(e){
+        // si le son est bloqué, ce sera silencieux, pas grave
+      }
+    }
+
+    function showResult(kind){
+      const isYes = kind === "yes";
+      modalTitle.textContent = isYes ? TEXTS.yesTitle : TEXTS.noTitle;
+      modalCaption.textContent = isYes ? TEXTS.yesCaption : TEXTS.noCaption;
+      modalImg.src = isYes ? IMAGES.yes : IMAGES.no;
+      overlay.classList.add("show");
+    }
+
+    function closeModal(){
+      overlay.classList.remove("show");
+      // re-jouer : repositionner
+      init();
+    }
+
+    // =========================
+    // Events - DIFFICULTÉ
+    // =========================
+
+    // OUI : fuit la plupart du temps quand on approche
+    yesBtn.addEventListener("pointerenter", () => {
+      if (Math.random() < HARDNESS.fleeOnEnterProbability) fleeYes();
+    });
+    yesBtn.addEventListener("mouseenter", () => {
+      if (Math.random() < HARDNESS.fleeOnEnterProbability) fleeYes();
+    });
+
+    // encore plus drôle : parfois en mouvement, mais pas tout le temps -> reste attrapable
+    yesBtn.addEventListener("pointermove", () => {
+      if (Math.random() < HARDNESS.fleeOnMoveProbability) fleeYes();
+    });
+
+    // mobile : touchstart -> il fuit souvent MAIS pas systématiquement
+    yesBtn.addEventListener("touchstart", (e) => {
+      // on empêche le "click" fantôme + scroll
+      e.preventDefault();
+      if (Math.random() < 0.75) fleeYes(); // 75% : dur mais possible
+    }, { passive:false });
+
+    // NO : facile
+    noBtn.addEventListener("pointerenter", tinyWiggleNo);
+    noBtn.addEventListener("mouseenter", tinyWiggleNo);
+
+    // =========================
+    // Clicks + sons + images
+    // =========================
+    yesBtn.addEventListener("click", () => {
+      playSound(sndYes);
+      showResult("yes");
+    });
+
+    noBtn.addEventListener("click", () => {
+      playSound(sndNo);
+      showResult("no");
+    });
+
+    // Modal
+    closeBtn.addEventListener("click", closeModal);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeModal();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    // Responsif
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(init, 120);
+    });
+
+    // go
+    setTimeout(init, 60);
+  </script>
 </body>
 </html>
-
