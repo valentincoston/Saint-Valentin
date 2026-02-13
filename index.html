@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>💘 Valentine Link</title>
+
   <style>
     :root{
       --bg1:#ff5fa2;
@@ -14,6 +15,7 @@
     }
 
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       min-height:100vh;
@@ -33,30 +35,21 @@
     .card{
       width:min(720px, 92vw);
       background:var(--card);
-      border:1px solid rgba(255,255,255,.35);
-      backdrop-filter: blur(10px);
       border-radius:26px;
       box-shadow: var(--shadow);
       padding:28px 22px 26px;
       text-align:center;
-      position:relative;
     }
 
     h1{
       margin:0 0 8px;
       font-size: clamp(34px, 4vw, 52px);
-      letter-spacing:.3px;
-    }
-    p{
-      margin:0 0 18px;
-      font-size: clamp(16px, 2vw, 18px);
-      opacity:.9;
     }
 
     .playground{
       position:relative;
-      height: 260px;
-      margin-top: 14px;
+      height:260px;
+      margin-top:14px;
       border-radius:20px;
       border:1px dashed rgba(0,0,0,.15);
       background: rgba(255,255,255,.45);
@@ -65,259 +58,153 @@
 
     .btn{
       position:absolute;
-      padding: 14px 18px;
-      min-width: 120px;
-      border: none;
-      border-radius: 999px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0,0,0,.15);
-      transition: transform .08s ease;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .btn:active{ transform: scale(.97); }
-
-    .yes{
-      background: #18c37e;
-      color: white;
-    }
-    .no{
-      background: #ff3b57;
-      color: white;
+      padding:14px 18px;
+      min-width:120px;
+      border:none;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 10px 25px rgba(0,0,0,.15);
     }
 
-    .hint{
-      margin-top:14px;
-      font-size: 13px;
-      opacity: .8;
-    }
+    .yes{ background:#18c37e; color:white; }
+    .no{ background:#ff3b57; color:white; }
 
-    /* Modal */
     .overlay{
       position:fixed;
       inset:0;
-      background: rgba(0,0,0,.55);
+      background:rgba(0,0,0,.55);
       display:none;
       align-items:center;
       justify-content:center;
-      padding: 18px;
-      z-index: 10;
     }
+
     .overlay.show{ display:flex; }
 
     .modal{
-      width: min(820px, 96vw);
-      background: rgba(255,255,255,.95);
-      border-radius: 24px;
+      width:min(820px,96vw);
+      background:white;
+      border-radius:24px;
       overflow:hidden;
-      box-shadow: 0 22px 80px rgba(0,0,0,.4);
-      position:relative;
+      padding:20px;
+      text-align:center;
     }
-    .modalTop{
-      padding: 16px 18px 0;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:12px;
-    }
-    .modal h2{
-      margin:0;
-      font-size: clamp(20px, 2.8vw, 28px);
-    }
-    .close{
-      border:none;
-      border-radius: 12px;
-      padding: 10px 12px;
-      cursor:pointer;
-      background: rgba(0,0,0,.08);
-      font-weight:700;
-    }
-    .imgWrap{
-      padding: 14px 18px 18px;
-    }
-    .img{
+
+    .modal img{
       width:100%;
-      height: min(60vh, 520px);
-      object-fit: cover;
-      border-radius: 18px;
-      border:1px solid rgba(0,0,0,.1);
-      background: #f2f2f2;
+      max-height:400px;
+      object-fit:cover;
+      border-radius:18px;
     }
-    .caption{
-      padding: 0 18px 18px;
-      margin-top: -6px;
-      font-size: 15px;
-      opacity:.9;
-    }
+
   </style>
 </head>
-<body>
-  <div class="card">
-    <h1>you love me 💘</h1>
-    <p>Choisis bien… (et attrape le bouton 😈)</p>
 
-    <div class="playground" id="playground" aria-label="zone de jeu">
+<body>
+
+  <div class="card">
+    <h1>Do you love me ? 💘</h1>
+
+    <div class="playground" id="playground">
       <button class="btn yes" id="yesBtn">Yes</button>
       <button class="btn no" id="noBtn">No</button>
     </div>
-
-    <div class="hint">Tip: sur mobile, essaie plusieurs fois 👀</div>
   </div>
 
-  <div class="overlay" id="overlay" role="dialog" aria-modal="true">
+  <div class="overlay" id="overlay">
     <div class="modal">
-      <div class="modalTop">
-        <h2 id="modalTitle">💖</h2>
-        <button class="close" id="closeBtn">Close</button>
-      </div>
-      <div class="imgWrap">
-        <img class="img" id="modalImg" alt="valentine image" />
-      </div>
-      <div class="caption" id="modalCaption"></div>
+      <h2 id="modalTitle"></h2>
+      <img id="modalImg">
+      <p id="modalCaption"></p>
+      <button onclick="overlay.classList.remove('show')">Close</button>
     </div>
   </div>
 
-  <script>
-    // ✅ 1) Remplace ces liens par TES images (ou des fichiers locaux)
-    // Option A (simple): mets des URLs d’images (ex: lien Imgur, Google Drive direct, etc.)
-    // Option B (propre): mets "yes.jpg" et "no.jpg" dans le même dossier que index.html, et remplace par "yes.jpg" / "no.jpg"
-    const IMAGES = {
-      yes: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1600&q=80",
-      no:  "https://images.unsplash.com/photo-1520962917960-67f39bfacbdc?auto=format&fit=crop&w=1600&q=80"
-    };
+<script>
 
-    const TEXTS = {
-      yesTitle: "OK… I knew it 😌💘",
-      yesCaption: "J’espère que tu as cliqué exprès. Happy Valentine’s, mi amor ❤️",
-      noTitle: "😂 Nice try",
-      noCaption: "Même si tu dis non… je sais la vérité 😈"
-    };
+const IMAGES = {
+  yes: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1600&q=80",
+  no: "https://images.unsplash.com/photo-1520962917960-67f39bfacbdc?auto=format&fit=crop&w=1600&q=80"
+};
 
-    const playground = document.getElementById("playground");
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn  = document.getElementById("noBtn");
+const TEXTS = {
+  yesTitle: "OK… I knew it 😌💘",
+  yesCaption: "Happy Valentine’s, mi amor ❤️",
+  noTitle: "😂 Nice try",
+  noCaption: "Même si tu dis non… je sais la vérité 😈"
+};
 
-    const overlay = document.getElementById("overlay");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalImg = document.getElementById("modalImg");
-    const modalCaption = document.getElementById("modalCaption");
-    const closeBtn = document.getElementById("closeBtn");
+const playground = document.getElementById("playground");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const overlay = document.getElementById("overlay");
+const modalTitle = document.getElementById("modalTitle");
+const modalImg = document.getElementById("modalImg");
+const modalCaption = document.getElementById("modalCaption");
 
-    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+function rand(min,max){ return Math.random()*(max-min)+min; }
 
-    function rand(min, max){ return Math.random() * (max - min) + min; }
+function placeButton(btn,x,y){
+  btn.style.left = x+"px";
+  btn.style.top = y+"px";
+}
 
-    function placeButton(btn, x, y){
-      btn.style.left = x + "px";
-      btn.style.top  = y + "px";
-    }
+function randomSpot(btn){
+  const r = playground.getBoundingClientRect();
+  const bw = btn.offsetWidth;
+  const bh = btn.offsetHeight;
+  const padding = 10;
 
-    function getBounds(){
-      const r = playground.getBoundingClientRect();
-      return { w: r.width, h: r.height };
-    }
+  const x = rand(padding, r.width-bw-padding);
+  const y = rand(padding, r.height-bh-padding);
 
-    function randomSpot(btn){
-      const { w, h } = getBounds();
-      const bw = btn.offsetWidth;
-      const bh = btn.offsetHeight;
+  placeButton(btn,x,y);
+}
 
-      const padding = 12;
-      const x = rand(padding, w - bw - padding);
-      const y = rand(padding, h - bh - padding);
-      placeButton(btn, x, y);
-    }
+function init(){
+  randomSpot(yesBtn);
+  randomSpot(noBtn);
+}
 
-    // place initial
-    function init(){
-      // petit placement “mignon”
-      const { w, h } = getBounds();
-      placeButton(yesBtn, w*0.25 - yesBtn.offsetWidth/2, h*0.60);
-      placeButton(noBtn,  w*0.70 - noBtn.offsetWidth/2,  h*0.60);
-    }
+function showResult(type){
+  modalTitle.textContent = TEXTS[type+"Title"];
+  modalImg.src = IMAGES[type];
+  modalCaption.textContent = TEXTS[type+"Caption"];
+  overlay.classList.add("show");
+}
 
-    // Bouton NO esquive (hover + touchstart)
-    function dodge(){
-      randomSpot(yesBtn);
-    }
+/* ============================= */
+/* 🔥 INVERSION DES DIFFICULTÉS */
+/* ============================= */
 
-    // Bonus: le YES bouge un peu aussi (mais moins)
-    function wiggleNo(){
-      const { w, h } = getBounds();
-      const bw = noBtn.offsetWidth;
-      const bh = noBtn.offsetHeight;
-      const padding = 12;
+/* YES = très difficile */
+["mouseenter","pointerenter","pointermove"].forEach(evt=>{
+  yesBtn.addEventListener(evt,()=>randomSpot(yesBtn));
+});
+yesBtn.addEventListener("touchstart",(e)=>{
+  e.preventDefault();
+  randomSpot(yesBtn);
+},{passive:false});
 
-      const currentX = parseFloat(noBtn.style.left || "0");
-      const currentY = parseFloat(noBtn.style.top  || "0");
+/* NO = bouge un peu seulement */
+noBtn.addEventListener("mouseenter",()=>{
+  if(Math.random()<0.35){
+    randomSpot(noBtn);
+  }
+});
+noBtn.addEventListener("touchstart",()=>{
+  if(Math.random()<0.45){
+    randomSpot(noBtn);
+  }
+},{passive:true});
 
-      const dx = rand(-70, 70);
-      const dy = rand(-45, 45);
+yesBtn.addEventListener("click",()=>showResult("yes"));
+noBtn.addEventListener("click",()=>showResult("no"));
 
-      const x = clamp(currentX + dx, padding, w - bw - padding);
-      const y = clamp(currentY + dy, padding, h - bh - padding);
+setTimeout(init,50);
 
-      placeButton(noBtn, x, y);
-    }
+</script>
 
-    // Afficher résultat
-    function showResult(kind){
-      const isYes = kind === "yes";
-      modalTitle.textContent = isYes ? TEXTS.yesTitle : TEXTS.noTitle;
-      modalCaption.textContent = isYes ? TEXTS.yesCaption : TEXTS.noCaption;
-      modalImg.src = isYes ? IMAGES.yes : IMAGES.no;
-
-      overlay.classList.add("show");
-    }
-
-    function closeModal(){
-      overlay.classList.remove("show");
-      // re-jouer : replacer aléatoirement
-      randomSpot(yesBtn);
-      randomSpot(noBtn);
-    }
-
-    // Events
-    noBtn.addEventListener("mouseenter", dodge);
-    noBtn.addEventListener("pointerenter", dodge);
-    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); dodge(); }, {passive:false});
-
-    // Le YES bouge un peu, pour le fun
-    yesBtn.addEventListener("mouseenter", () => {
-      if (Math.random() < 0.35) wiggleYes();
-    });
-    yesBtn.addEventListener("touchstart", () => {
-      if (Math.random() < 0.45) wiggleYes();
-    }, {passive:true});
-
-    yesBtn.addEventListener("click", () => showResult("yes"));
-    noBtn.addEventListener("click",  () => showResult("no"));
-
-    closeBtn.addEventListener("click", closeModal);
-    overlay.addEventListener("click", (e) => {
-      if (e.target === overlay) closeModal();
-    });
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeModal();
-    });
-
-    // Responsif: re-init sur resize
-    let resizeTimer;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        init();
-      }, 120);
-    });
-
-    // Preload images (optionnel mais agréable)
-    [IMAGES.yes, IMAGES.no].forEach(src => { const i=new Image(); i.src=src; });
-
-    // go
-    // petit délai pour que les dimensions soient bien calculées
-    setTimeout(() => { init(); }, 50);
-  </script>
 </body>
 </html>
 
