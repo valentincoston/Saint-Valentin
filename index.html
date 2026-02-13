@@ -252,8 +252,8 @@
       const currentX = parseFloat(yesBtn.style.left || "0");
       const currentY = parseFloat(yesBtn.style.top  || "0");
 
-      const dx = rand(-70, 70);
-      const dy = rand(-45, 45);
+      const dx = rand(-200, 200);
+      const dy = rand(-150, 150);
 
       const x = clamp(currentX + dx, padding, w - bw - padding);
       const y = clamp(currentY + dy, padding, h - bh - padding);
