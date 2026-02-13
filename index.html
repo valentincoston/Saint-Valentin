@@ -243,22 +243,8 @@
     }
 
     // Bonus: le YES bouge un peu aussi (mais moins)
-    function wiggleYes(){
-      const { w, h } = getBounds();
-      const bw = yesBtn.offsetWidth;
-      const bh = yesBtn.offsetHeight;
-      const padding = 12;
-
-      const currentX = parseFloat(yesBtn.style.left || "0");
-      const currentY = parseFloat(yesBtn.style.top  || "0");
-
-      const dx = rand(-200, 200);
-      const dy = rand(-150, 150);
-
-      const x = clamp(currentX + dx, padding, w - bw - padding);
-      const y = clamp(currentY + dy, padding, h - bh - padding);
-
-      placeButton(yesBtn, x, y);
+    function dodge(){
+      randomSpot(noBtn);
     }
 
     // Afficher résultat
