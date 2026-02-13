@@ -239,18 +239,18 @@
 
     // Bouton NO esquive (hover + touchstart)
     function dodge(){
-      randomSpot(noBtn);
+      randomSpot(yesBtn);
     }
 
     // Bonus: le YES bouge un peu aussi (mais moins)
-    function wiggleYes(){
+    function wiggleNo(){
       const { w, h } = getBounds();
-      const bw = yesBtn.offsetWidth;
-      const bh = yesBtn.offsetHeight;
+      const bw = noBtn.offsetWidth;
+      const bh = noBtn.offsetHeight;
       const padding = 12;
 
-      const currentX = parseFloat(yesBtn.style.left || "0");
-      const currentY = parseFloat(yesBtn.style.top  || "0");
+      const currentX = parseFloat(noBtn.style.left || "0");
+      const currentY = parseFloat(noBtn.style.top  || "0");
 
       const dx = rand(-70, 70);
       const dy = rand(-45, 45);
@@ -258,7 +258,7 @@
       const x = clamp(currentX + dx, padding, w - bw - padding);
       const y = clamp(currentY + dy, padding, h - bh - padding);
 
-      placeButton(yesBtn, x, y);
+      placeButton(noBtn, x, y);
     }
 
     // Afficher résultat
